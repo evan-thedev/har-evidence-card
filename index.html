@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR Evidence Card</title>
+    <meta name="description" content="Client-side HAR drop tool. Builds a UAT evidence card: status histogram, failed URLs, slowest requests, copy-as-markdown.">
+    <meta name="author" content="Evan Parrott">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HAR Evidence Card</h1>
+            <p class="subtitle">Drop a HAR file to generate a UAT evidence summary</p>
+        </header>
+
+        <main>
+            <section class="upload-section" id="uploadSection">
+                <div class="drop-zone" id="dropZone">
+                    <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="drop-text">Drop HAR file here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".har,.json" aria-label="Choose HAR file">
+                </div>
+                
+                <div class="actions">
+                    <button id="loadSampleBtn" class="btn btn-secondary">Load Sample HAR</button>
+                </div>
+
+                <div class="error-message" id="errorMessage" role="alert"></div>
+            </section>
+
+            <section class="card-section" id="cardSection" style="display: none;">
+                <div class="card-header">
+                    <h2>Evidence Card</h2>
+                    <div class="card-actions">
+                        <button id="copyMarkdownBtn" class="btn btn-primary">Copy as Markdown</button>
+                        <button id="resetBtn" class="btn btn-secondary">New File</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">File:</span>
+                            <span class="meta-value" id="fileName"></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Timestamp:</span>
+                            <span class="meta-value" id="timestamp"></span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalRequests">0</div>
+                            <div class="stat-label">Total Requests</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="timeWindow">—</div>
+                            <div class="stat-label">Time Window</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalBytes">—</div>
+                            <div class="stat-label">Transferred</div>
+                        </div>
+                    </div>
+
+                    <div class="histogram-section">
+                        <h3>Status Code Distribution</h3>
+                        <div class="histogram" id="histogram"></div>
+                    </div>
+
+                    <div class="failed-section">
+                        <h3>Failed Requests</h3>
+                        <div class="failed-count" id="failedCount">0 failed</div>
+                        <div class="failed-list" id="failedList"></div>
+                    </div>
+
+                    <div class="slowest-section">
+                        <div class="slowest-header">
+                            <h3>Slowest Requests</h3>
+                            <div class="slowest-controls">
+                                <label for="slowestLimit">Show top:</label>
+                                <select id="slowestLimit" aria-label="Number of slowest requests to show">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="slowest-list" id="slowestList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </main>
+
+        <footer>
+            <p>
+                HAR Evidence Card by <a href="https://github.com/evan-thedev" target="_blank" rel="noopener">Evan Parrott</a>
+                • <a href="https://github.com/evan-thedev/har-evidence-card" target="_blank" rel="noopener">View on GitHub</a>
+                • All processing happens in your browser
+            </p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
