@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR Evidence Card - Tests</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+
+        .summary {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .summary.error {
+            border-left-color: #ef4444;
+        }
+
+        .summary.success {
+            border-left-color: #22c55e;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        .test-results {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .test-item {
+            background: #1e293b;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border-left: 4px solid #94a3b8;
+        }
+
+        .test-item.pass {
+            border-left-color: #22c55e;
+        }
+
+        .test-item.fail {
+            border-left-color: #ef4444;
+        }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .test-status {
+            font-weight: 700;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .test-status.pass {
+            background: #22c55e;
+            color: white;
+        }
+
+        .test-status.fail {
+            background: #ef4444;
+            color: white;
+        }
+
+        .test-message {
+            color: #cbd5e1;
+            font-size: 0.875rem;
+        }
+
+        .test-error {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            border-radius: 4px;
+            color: #ef4444;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.75rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .run-button {
+            padding: 0.75rem 1.5rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            font-family: inherit;
+        }
+
+        .run-button:hover {
+            background: #2563eb;
+        }
+
+        .run-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HAR Evidence Card Tests</h1>
+        
+        <div class="summary" id="summary">
+            <div class="stats">
+                <div><strong>Total:</strong> <span id="totalTests">0</span></div>
+                <div><strong>Passed:</strong> <span id="passedTests">0</span></div>
+                <div><strong>Failed:</strong> <span id="failedTests">0</span></div>
+                <div><strong>Duration:</strong> <span id="duration">0ms</span></div>
+            </div>
+        </div>
+
+        <button id="runButton" class="run-button">Run Tests</button>
+
+        <div class="test-results" id="testResults"></div>
+
+        <footer>
+            <p>
+                <a href="index.html">← Back to HAR Evidence Card</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>
